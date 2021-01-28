@@ -26,7 +26,7 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonProperty
 	@Column
-	private Long id;
+	private long id;
 	
 	@ManyToMany
 	@JsonProperty
@@ -57,11 +57,11 @@ public class Cart {
 		this.user = user;
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
