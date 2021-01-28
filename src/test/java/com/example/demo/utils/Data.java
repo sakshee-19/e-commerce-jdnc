@@ -31,11 +31,11 @@ public class Data {
         return item;
     }
 
-    public List<Item> createItemList(int n, TestEntityManager entityManager){
+    public List<Item> createItemList(int n, TestEntityManager entityManager) {
         List<Item> it = new ArrayList<>();
-        for(int i=0; i<n; ++i){
-            Item itm = createItem((long)i);
-            if(entityManager != null){
+        for (int i = 0; i < n; ++i) {
+            Item itm = createItem((long) i);
+            if (entityManager != null) {
                 entityManager.persist(itm);
             }
             it.add(itm);
@@ -46,6 +46,7 @@ public class Data {
     public User crateUser(String name, Long id) {
         User user = new User();
         user.setUsername(name);
+        user.setPassword("****");
 //        user.setId(id);
         return user;
     }
