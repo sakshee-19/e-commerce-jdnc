@@ -50,6 +50,7 @@ public class CartController {
 
     @PostMapping("/removeFromCart")
     public ResponseEntity<Cart> removeFromcart(@RequestBody ModifyCartRequest request) {
+        System.out.println("here in sakshee");
         User user = userRepository.findByUsername(request.getUsername());
         if (user == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

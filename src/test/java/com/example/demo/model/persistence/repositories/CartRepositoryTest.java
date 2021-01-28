@@ -5,19 +5,13 @@ import com.example.demo.model.persistence.Item;
 import com.example.demo.model.persistence.User;
 import com.example.demo.utils.Data;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.transaction.BeforeTransaction;
 
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-
-import javax.persistence.EntityManagerFactory;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
