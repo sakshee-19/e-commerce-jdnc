@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
+    private Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -25,34 +26,39 @@ public class UserController {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    private Logger log = LoggerFactory.getLogger(UserController.class);
-
     @GetMapping("/id/{id}")
     public ResponseEntity<User> findById(@PathVariable Long id) {
+        logger.info("findById User id={}", id);
         return ResponseEntity.of(userRepository.findById(id));
     }
 
     @GetMapping("/{username}")
     public ResponseEntity<User> findByUserName(@PathVariable String username) {
+        logger.info("**START** findByUserName userName={}", username);
         User user = userRepository.findByUsername(username);
+        logger.info("**END** findByUserName");
         return user == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(user);
     }
 
     @PostMapping("/create")
     public ResponseEntity<User> createUser(@RequestBody CreateUserRequest createUserRequest) {
+        logger.info("**START** createUser username={}", createUserRequest.getUsername());
         User user = new User();
         user.setUsername(createUserRequest.getUsername());
-
         String password = createUserRequest.getPassword();
-        if (password.length() <7 || !password.equals(createUserRequest.getConfirmPassword())){
-            log.error("Error with user password can not create user");
+        if (password.length() < 7 || !password.equals(createUserRequest.getConfirmPassword())) {
+            logger.error("Error with user password can not create user");
             return ResponseEntity.badRequest().build();
         }
+        logger.info("Password criteria check passed");
         user.setPassword(bCryptPasswordEncoder.encode(password));
+        logger.info("saving cart");
         Cart cart = new Cart();
         cartRepository.save(cart);
         user.setCart(cart);
+        logger.info("Saving User");
         userRepository.save(user);
+        logger.info("**END** createUser username={}", createUserRequest.getUsername());
         return ResponseEntity.ok(user);
     }
 
